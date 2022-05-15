@@ -11,7 +11,7 @@ import React, { useState } from 'react';
 import { ProFormCaptcha, ProFormCheckbox, ProFormText, LoginForm } from '@ant-design/pro-form';
 import { useIntl, history, FormattedMessage, SelectLang, useModel } from 'umi';
 import Footer from '@/components/Footer';
-import { login } from '@/services/ant-design-pro/api';
+import { login } from '@/services/user/api';
 import { getFakeCaptcha } from '@/services/ant-design-pro/login';
 
 import styles from './index.less';
@@ -32,6 +32,7 @@ const LoginMessage: React.FC<{
 const Login: React.FC = () => {
   const [userLoginState, setUserLoginState] = useState<API.LoginResult>({});
   const [type, setType] = useState<string>('account');
+  const [loginMessage, setloginMessage] = useState<string>('');
   const { initialState, setInitialState } = useModel('@@initialState');
 
   const intl = useIntl();
@@ -49,11 +50,12 @@ const Login: React.FC = () => {
   const handleSubmit = async (values: API.LoginParams) => {
     try {
       // 登录
-      const msg = await login({ ...values, type });
-      if (msg.status === 'ok') {
+      const result = await login({ ...values });
+      if (result.code === 200) {
+        localStorage.setItem('Authorization', result.data.token)
         const defaultLoginSuccessMessage = intl.formatMessage({
           id: 'pages.login.success',
-          defaultMessage: '登录成功！',
+          defaultMessage: result.message,
         });
         message.success(defaultLoginSuccessMessage);
         await fetchUserInfo();
@@ -64,13 +66,14 @@ const Login: React.FC = () => {
         history.push(redirect || '/');
         return;
       }
-      console.log(msg);
+      console.log(result);
       // 如果失败去设置用户错误信息
-      setUserLoginState(msg);
+      setUserLoginState({ type: "account", status: 'error' });
+      setloginMessage(result.message)
     } catch (error) {
       const defaultLoginFailureMessage = intl.formatMessage({
         id: 'pages.login.failure',
-        defaultMessage: '登录失败，请重试！',
+        defaultMessage: "登陆接口异常，登陆失败！",
       });
       message.error(defaultLoginFailureMessage);
     }
@@ -123,10 +126,7 @@ const Login: React.FC = () => {
 
           {status === 'error' && loginType === 'account' && (
             <LoginMessage
-              content={intl.formatMessage({
-                id: 'pages.login.accountLogin.errorMessage',
-                defaultMessage: '账户或密码错误(admin/ant.design)',
-              })}
+              content={loginMessage}
             />
           )}
           {type === 'account' && (
@@ -137,20 +137,20 @@ const Login: React.FC = () => {
                   size: 'large',
                   prefix: <UserOutlined className={styles.prefixIcon} />,
                 }}
-                placeholder={intl.formatMessage({
-                  id: 'pages.login.username.placeholder',
-                  defaultMessage: '用户名: admin or user',
-                })}
+                placeholder={'用户名3-10个字符!'}
                 rules={[
                   {
                     required: true,
-                    message: (
-                      <FormattedMessage
-                        id="pages.login.username.required"
-                        defaultMessage="请输入用户名!"
-                      />
-                    ),
+                    message: '请输入用户名!'
                   },
+                  {
+                    min: 3,
+                    message: '用户名3-10个字符!'
+                  },
+                  {
+                    max: 15,
+                    message: '用户名3-10个字符!'
+                  }
                 ]}
               />
               <ProFormText.Password
@@ -159,19 +159,19 @@ const Login: React.FC = () => {
                   size: 'large',
                   prefix: <LockOutlined className={styles.prefixIcon} />,
                 }}
-                placeholder={intl.formatMessage({
-                  id: 'pages.login.password.placeholder',
-                  defaultMessage: '密码: ant.design',
-                })}
+                placeholder={'密码长度6-12位'}
                 rules={[
                   {
                     required: true,
-                    message: (
-                      <FormattedMessage
-                        id="pages.login.password.required"
-                        defaultMessage="请输入密码！"
-                      />
-                    ),
+                    message: '请输入密码！'
+                  },
+                  {
+                    min: 6,
+                    message: '密码长度6-12位'
+                  },
+                  {
+                    max: 12,
+                    message: '密码长度6-12位'
                   },
                 ]}
               />

@@ -19,7 +19,7 @@ export default defineConfig({
   },
   layout: {
     // https://umijs.org/zh-CN/plugins/plugin-layout
-    locale: true,
+    locale: false,
     siderWidth: 208,
     ...defaultSettings,
   },
@@ -27,7 +27,7 @@ export default defineConfig({
   locale: {
     // default zh-CN
     default: 'zh-CN',
-    antd: true,
+    antd: false,
     // default true, when it is true, will use `navigator.language` overwrite default
     baseNavigator: true,
   },
