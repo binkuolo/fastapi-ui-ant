@@ -70,15 +70,15 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     },
     links: isDev
       ? [
-        <Link key="openapi" to="/umi/plugin/openapi" target="_blank">
-          <LinkOutlined />
-          <span>OpenAPI 文档</span>
-        </Link>,
-        <Link to="/~docs" key="docs">
-          <BookOutlined />
-          <span>业务组件文档</span>
-        </Link>,
-      ]
+          <Link key="openapi" to="/umi/plugin/openapi" target="_blank">
+            <LinkOutlined />
+            <span>OpenAPI 文档</span>
+          </Link>,
+          <Link to="/~docs" key="docs">
+            <BookOutlined />
+            <span>业务组件文档</span>
+          </Link>,
+        ]
       : [],
     menuHeaderRender: undefined,
     // 自定义 403 页面
@@ -137,12 +137,12 @@ const errorHandler = (error: ResponseError) => {
     const errorText = codeMessage[response.status] || response.statusText;
     const { status } = response;
     if (status === 401) {
-      message.info("登陆已过期，请重新登陆！")
-      history.push("/user/login")
+      message.info('登陆已过期，请重新登陆！');
+      history.push('/user/login');
       throw error;
     }
     if (status === 403) {
-      message.warn("权限不足，可向超级管理员索取")
+      message.warn('无访问权限，可向超级管理员索取');
       throw error;
     }
 
@@ -162,7 +162,7 @@ const errorHandler = (error: ResponseError) => {
 };
 // 请求拦截添加token
 const authHeaderInterceptor = (url: string, options: RequestOptionsInit) => {
-  const authHeader = { Authorization: `Bearer ${localStorage.getItem('Authorization') || ''}` }
+  const authHeader = { Authorization: `Bearer ${localStorage.getItem('Authorization') || ''}` };
   return {
     url: `${url}`,
     options: { ...options, interceptors: true, headers: authHeader },
@@ -173,5 +173,5 @@ const authHeaderInterceptor = (url: string, options: RequestOptionsInit) => {
 export const request: RequestConfig = {
   errorHandler,
   // 请求拦截
-  requestInterceptors: [authHeaderInterceptor]
+  requestInterceptors: [authHeaderInterceptor],
 };
