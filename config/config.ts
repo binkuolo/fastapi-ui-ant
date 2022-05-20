@@ -72,6 +72,7 @@ export default defineConfig({
       projectName: 'swagger',
     },
   ],
+  // publicPath: '/static/templates/',
   nodeModulesTransform: { type: 'none' },
   mfsu: {},
   webpack5: {},

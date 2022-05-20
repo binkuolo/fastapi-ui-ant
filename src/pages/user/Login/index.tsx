@@ -15,6 +15,7 @@ import { login } from '@/services/user/api';
 import { getFakeCaptcha } from '@/services/ant-design-pro/login';
 
 import styles from './index.less';
+import logo from '../../../../public/logo.svg'
 
 const LoginMessage: React.FC<{
   content: string;
@@ -87,7 +88,7 @@ const Login: React.FC = () => {
       </div>
       <div className={styles.content}>
         <LoginForm
-          logo={<img alt="logo" src="/logo.svg" />}
+          logo={<img alt="logo" src={logo} />}
           title="Ant Design"
           subTitle={intl.formatMessage({ id: 'pages.layouts.userLayout.title' })}
           initialValues={{
