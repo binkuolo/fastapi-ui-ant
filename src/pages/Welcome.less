@@ -6,3 +6,44 @@
   background: @input-bg;
   box-shadow: @card-shadow;
 }
+.mcon {
+  height: 450px;
+  margin: 20px;
+  overflow: hidden;
+}
+.wechat {
+  height: 440px;
+  margin-bottom: 10px;
+  // overflow: auto;
+  // overflow: -moz-scrollbars-none;
+  overflow-y: scroll;
+  .msglist {
+    display: flex;
+    flex-direction: column;
+    .header {
+      display: flex;
+      // justify-content: space-between;
+    }
+    .context {
+      display: flex;
+      margin-bottom: 20px;
+      .message {
+        margin-left: 30px;
+        // width: 400px;
+        padding: 10px;
+        white-space: pre-wrap;
+        background-color: #52c41a;
+        border-radius: 10px;
+      }
+      .time {
+        display: flex;
+        justify-content: right;
+        margin: 10px;
+        color: gray;
+      }
+    }
+  }
+}
+.wechat::-webkit-scrollbar {
+  display: none;
+}

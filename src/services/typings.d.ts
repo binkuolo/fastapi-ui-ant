@@ -14,3 +14,20 @@ declare namespace APIBASE {
     current?: number | undefined;
   };
 }
+
+declare namespace Websocket {
+  type Message = {
+    action: string;
+    user: number;
+    data: any;
+  };
+  type OnlineUser = {
+    username: string;
+    id: number;
+  }[];
+
+  type MessageList = {
+    id: number;
+    message: any;
+  };
+}

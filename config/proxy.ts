@@ -11,9 +11,17 @@ export default {
     // localhost:8000/api/** -> https://preview.pro.ant.design/api/**
     '/api/': {
       // 要代理的地址
-      target: 'http://localhost:9000',
+      target: 'http://192.168.3.101:9000',
       // 配置了这个可以从 http 代理到 https
       // 依赖 origin 的功能可能需要这个，比如 cookie
+      changeOrigin: true,
+    },
+    '/ws': {
+      // 要代理的地址
+      target: 'http://192.168.3.101:9000',
+      // 配置了这个可以从 http 代理到 https
+      // 依赖 origin 的功能可能需要这个，比如 cookie
+      ws: true,
       changeOrigin: true,
     },
   },
