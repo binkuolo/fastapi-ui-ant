@@ -31,6 +31,8 @@ const Welcome: React.FC = () => {
   const { ws, connect_websocket, onlineUser, messageList } = useModel('useWebsocketModel');
 
   useEffect(() => {
+    console.log('componets mount', currentUser);
+
     if (!currentUser) {
       return;
     }

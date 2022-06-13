@@ -5,10 +5,10 @@ export default function useWebsocketModel() {
   const [online, setonline] = useState(false);
   const [onlineUser, setonlineUser] = useState<Websocket.OnlineUser>([]);
   const [messageList, setmessageList] = useState<Websocket.MessageList[]>([]);
-  const token = localStorage.getItem('Authorization') || '';
 
   // websocket连接
   const connect_websocket = useCallback(() => {
+    const token = localStorage.getItem('Authorization') || '';
     if (!ws && token) {
       console.log('ws_client ...');
       const protocol = window.location.protocol.indexOf('https:') == 0 ? 'wss' : 'ws';
@@ -22,7 +22,7 @@ export default function useWebsocketModel() {
         setTimeout(() => connect_websocket(), 3000);
       };
     }
-  }, [token, setws, ws]);
+  }, [setws, ws]);
 
   useEffect(() => {
     if (ws) {
