@@ -41,6 +41,17 @@ declare namespace USER {
     sex?: number;
     remarks?: string;
   };
+  type UpdateUserInfo = {
+    nickname?: string;
+    user_phone?: string;
+    user_email?: string;
+    password?: string;
+    header_img?: string;
+  };
+  type UpdateMobile = {
+    captcha: string;
+    mobile: string;
+  };
   type SetUserRole = {
     user_id: number;
     roles: string[];
@@ -68,8 +79,23 @@ declare namespace USER {
   interface ResLogin extends APIBASE.BASE {
     data: Token;
   }
+  interface WechatAuthUrl extends APIBASE.BASE {
+    data: {
+      authorize_url: string;
+      expire: number;
+    };
+  }
   interface ResGetUserInfo extends APIBASE.BASE {
     data: UserInfo;
+  }
+  type AccessLog = {
+    create_time: Date;
+    ip: string;
+    note: string;
+    id: number;
+  };
+  interface AccessLogList extends APIBASE.BASE {
+    data: AccessLog[];
   }
   interface ResGetUserList extends APIBASE.ANTTABLE {
     data: UserItem[];

@@ -1,15 +1,14 @@
-import type { Settings as LayoutSettings } from '@ant-design/pro-layout';
-import { SettingDrawer } from '@ant-design/pro-layout';
-import { PageLoading } from '@ant-design/pro-layout';
-import type { RunTimeLayoutConfig, RequestConfig } from 'umi';
-import type { RequestOptionsInit, ResponseError } from 'umi-request';
-import { history, Link } from 'umi';
 import RightContent from '@/components/RightContent';
+import { BookOutlined, LinkOutlined } from '@ant-design/icons';
+import type { Settings as LayoutSettings } from '@ant-design/pro-layout';
+import { PageLoading, SettingDrawer } from '@ant-design/pro-layout';
+import { message, notification } from 'antd';
+import type { RequestConfig, RunTimeLayoutConfig } from 'umi';
+import { history, Link } from 'umi';
+import type { RequestOptionsInit, ResponseError } from 'umi-request';
+import defaultSettings from '../config/defaultSettings';
 // import Footer from '@/components/Footer';
 import { currentUser as queryCurrentUser } from './services/user/api';
-import { BookOutlined, LinkOutlined } from '@ant-design/icons';
-import defaultSettings from '../config/defaultSettings';
-import { message, notification } from 'antd';
 
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
@@ -58,7 +57,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     rightContentRender: () => <RightContent />,
     disableContentMargin: false,
     waterMarkProps: {
-      content: initialState?.currentUser?.username,
+      content: 'FastApi',
     },
     // footerRender: () => <Footer />,
     onPageChange: () => {

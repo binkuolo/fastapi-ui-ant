@@ -48,6 +48,24 @@
     ],
   },
   {
+    path: '/account',
+    routes: [
+      {
+        name: '个人中心',
+        path: '/account/center',
+        component: './user/Center',
+      },
+      {
+        name: '个人设置',
+        path: '/account/settings',
+        component: './user/Settings',
+      },
+      {
+        component: './404',
+      },
+    ],
+  },
+  {
     path: '/',
     redirect: '/welcome',
   },
