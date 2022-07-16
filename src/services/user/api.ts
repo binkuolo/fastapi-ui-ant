@@ -25,6 +25,14 @@ export async function getModifyCaptcha(params: { phone_number: string }) {
   });
 }
 
+/** 获取腾讯云对象存储cos临时访问token */
+export async function getFederationToken(params: { file_type: string }) {
+  return request<USER.CosFederationToken>('/api/v1/cos/get/federation/token', {
+    method: 'GET',
+    params,
+  });
+}
+
 /** 获取微信授权url */
 export async function getWechatAuthUrl(params: { scan_type: string }) {
   return request<USER.WechatAuthUrl>('/api/v1/wechat/auth/url', {

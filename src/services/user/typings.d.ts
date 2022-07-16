@@ -72,6 +72,21 @@ declare namespace USER {
     remarks: string;
   };
 
+  type FederationToken = {
+    TmpSecretId: string;
+    TmpSecretKey: string;
+    StartTime: number;
+    ExpiredTime: number;
+    SecurityToken: string;
+    Bucket: string;
+    Region: string;
+    Key: string;
+  };
+
+  interface CosFederationToken extends APIBASE.BASE {
+    data: FederationToken;
+  }
+
   interface GetUserListQuery extends APIBASE.TableQuery {
     username?: string;
   }
