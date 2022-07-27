@@ -5,7 +5,6 @@ export async function login(body: USER.AccountLogin) {
   return request<USER.ResLogin>('/api/v1/admin/user/account/login', {
     method: 'POST',
     data: body,
-    params: body,
   });
 }
 
